@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	mess "lesson_8/returnStr"
 )
 
@@ -9,5 +10,5 @@ import (
 // Импортируйте и используйте этот пакет в другой программе.
 
 func main() {
-	mess.ReturnStr("Hi!")
+	fmt.Println(mess.ReturnStr("Hi!"))
 }

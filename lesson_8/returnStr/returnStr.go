@@ -1,7 +1,5 @@
 package returnStr
 
-import "fmt"
-
-func ReturnStr(mess string) {
-	fmt.Println(mess)
+func ReturnStr(mess string) string {
+	return mess
 }

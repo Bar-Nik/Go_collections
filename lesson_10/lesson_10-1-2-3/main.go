@@ -21,17 +21,17 @@ func (r *Rectangle) Scale(factor float64) {
 // является ли прямоугольник квадратом.
 
 func (r Rectangle) IsSquare() bool {
-	if r.Width == r.Height {
-		return true
-	}
-	return false
+	return r.Width == r.Height
 }
 
 // 2. Методы, изменяющие значения: Добавьте к структуре "Rectangle" метод
 // "DoubleSize", который удваивает размеры прямоугольника.
 
-func (r Rectangle) DoubleSize() (float64, float64) {
-	return r.Height * 2, r.Width * 2
+func (r Rectangle) DoubleSize() Rectangle {
+	return Rectangle{
+		Height: r.Height * 2,
+		Width:  r.Width * 2,
+	}
 }
 
 // 3. Использование нескольких методов: Используйте методы "Area" и
