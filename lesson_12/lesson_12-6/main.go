@@ -26,7 +26,7 @@ func main() {
 	}
 	x, err := os.Open("file.txt")
 	if err != nil {
-		fmt.Println("Сработала в ", e.Error())
+		fmt.Println("Сработала в ", e)
 	} else {
 		fmt.Println(x)
 	}
