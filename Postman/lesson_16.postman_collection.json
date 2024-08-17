@@ -98,13 +98,13 @@
 			"response": []
 		},
 		{
-			"name": "Добавить книгу 4",
+			"name": "Добавить несколько книг",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\t\"id\":      4,\n\t\t\"title\":   \"Космическая философия\",\n\t\t\"authors\": [\"Циолковский Константин Эдуардович\"],\n\t\t\"Year\":    1895\n\t}",
+					"raw": "[\n    {\n\t\t\"title\":   \"Космическая философия\",\n\t\t\"authors\": [\"Циолковский Константин Эдуардович\"],\n\t\t\"Year\":    1895\n\t},\n{\t\n\t\t\"title\":   \"Весёлая наука\",\n\t\t\"authors\": [\"Фри́дрих Ни́цше\"],\n\t\t\"Year\":    1887\n\t}]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -112,7 +112,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8080/book",
+					"raw": "http://127.0.0.1:8080/books",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -122,38 +122,7 @@
 					],
 					"port": "8080",
 					"path": [
-						"book"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Добавить книгу 5",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\t\"id\":      5,\n\t\t\"title\":   \"Весёлая наука\",\n\t\t\"authors\": [\"Фри́дрих Ни́цше\"],\n\t\t\"Year\":    1887\n\t}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8080/book",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"book"
+						"books"
 					]
 				}
 			},
@@ -220,6 +189,18 @@
 		},
 		{
 			"name": "Посмотреть все книги",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -241,7 +222,7 @@
 			"response": []
 		},
 		{
-			"name": "Показать 2 книги",
+			"name": "Показать книгу по году",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -253,7 +234,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:8080/books?limit=2",
+					"raw": "http://127.0.0.1:8080/books?year=2019",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -267,8 +248,8 @@
 					],
 					"query": [
 						{
-							"key": "limit",
-							"value": "2"
+							"key": "year",
+							"value": "2019"
 						}
 					]
 				}
@@ -276,12 +257,12 @@
 			"response": []
 		},
 		{
-			"name": "Обратный порядок книг",
+			"name": "Обратный порядок и определенное кол",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8080/book?id=2",
+					"raw": "http://127.0.0.1:8080/books?sort=desk&limit=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -291,12 +272,16 @@
 					],
 					"port": "8080",
 					"path": [
-						"book"
+						"books"
 					],
 					"query": [
 						{
-							"key": "id",
-							"value": "2"
+							"key": "sort",
+							"value": "desk"
+						},
+						{
+							"key": "limit",
+							"value": "3"
 						}
 					]
 				}
@@ -323,7 +308,11 @@
 				"exec": [
 					"pm.test(\"Status code is 200\", function () {",
 					"    pm.response.to.have.status(200);",
-					"});"
+					"});",
+					"pm.test(\"Status code is 204\", function () {",
+					"    pm.response.to.have.status(204);",
+					"});",
+					""
 				]
 			}
 		}
