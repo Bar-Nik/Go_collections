@@ -26,18 +26,15 @@ func AddBook(w http.ResponseWriter, r *http.Request) {
 		handleError(w, http.StatusBadRequest, err)
 		return
 	}
-	t := newBook.Title
-	a := newBook.Authors
-	y := newBook.Year
-	if t == "" {
+	if newBook.Title == "" {
 		handleError(w, http.StatusBadRequest, fmt.Errorf("title not found"))
 		return
 	}
-	if a == nil {
+	if len(newBook.Authors) == 0 {
 		handleError(w, http.StatusBadRequest, fmt.Errorf("authors not found"))
 		return
 	}
-	if y == 0 {
+	if newBook.Year == 0 {
 		handleError(w, http.StatusBadRequest, fmt.Errorf("year not found"))
 		return
 	}
